@@ -14,4 +14,4 @@ messages = [
 ]
 
 for chunk in model.stream(messages):
-    print(chunk.content, end="", flush=True)
+    print(chunk.content, end="", flush=True)  # type: ignore

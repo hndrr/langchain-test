@@ -1,7 +1,8 @@
 import config  # type: ignore
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser  # type: ignore
 from langchain_openai import ChatOpenAI
+from langchain_core.output_parsers import StrOutputParser
+from typing import Any
 
 model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
@@ -17,9 +18,12 @@ prompt = ChatPromptTemplate(
     ]
 )
 
-ai_messages: PromptValue = prompt.invoke({"name": "John Smith"})
-print(ai_messages)
-# parser = StrOutputParser()
-# parsed_result = parser.invoke(ai_messages)
+parser = StrOutputParser()
 
-# print(parsed_result)
+chain: Any = prompt | model | parser
+
+result: Any = chain.invoke({"name": "John Smith"})
+print(result)
+
+# ai_messages = prompt.invoke({"name": "John Smith"})  # type: ignore
+# print(ai_messages)

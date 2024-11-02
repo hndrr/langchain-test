@@ -14,9 +14,9 @@ messages = [
     HumanMessage(content="はい、私の名前がわかりますか？"),
 ]
 
-ai_messages = model.invoke(messages)
-# print(ai_messages.content)
 parser = StrOutputParser()
-parsed_result = parser.invoke(ai_messages)
 
-print(parsed_result)
+chain = model | parser
+
+result = chain.invoke(messages)
+print(result)
