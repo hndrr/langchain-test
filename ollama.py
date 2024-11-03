@@ -1,22 +1,27 @@
-import config  # type: ignore
 import gradio as gr  # type: ignore
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
-from langchain_openai import ChatOpenAI
 
 
 # 翻訳する関数を定義
 def translate_text(text: str, target_language: str):  # type: ignore
-    model = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    model = ChatOllama(model="llama3.1")
     parser = StrOutputParser()
     chain = model | parser
     messages = [
-        SystemMessage(content=f"Translate the following text to {target_language}:"),
-        HumanMessage(content=text),
+        {
+            "role": "system",
+            "content": f"Translate the following text to {target_language}:",
+        },
+        {"role": "user", "content": text},
     ]
-    return chain.invoke(messages)
+
+    # Ollamaチャットモデルで翻訳を実行
+    response = chain.invoke(messages)
+    return response
 
 
+# Gradioインターフェースの設定
 demo = gr.Interface(
     fn=translate_text,
     inputs=[
@@ -37,7 +42,7 @@ demo = gr.Interface(
     ],
     outputs="text",
     title="翻訳アプリ",
-    description="ChatGPTを使ってテキストを指定した言語に翻訳します。",
+    description="Ollamaを使ってテキストを指定した言語に翻訳します。",
 )
 
 # アプリを起動
