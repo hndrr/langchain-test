@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ### Config
 
- `.env` ファイルに以下を設定してください。langsmithのAPIキーは[こちら](https://smith.langchain.com/keys)から取得。
+ `.env` ファイルに以下を設定してください。langsmithのAPIキーは[こちら](https://smith.langchain.com/settings)から取得。
 
 ```python
 LANGCHAIN_TRACING_V2=true
