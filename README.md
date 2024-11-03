@@ -34,7 +34,7 @@ LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
 LANGCHAIN_API_KEY=""
 LANGCHAIN_PROJECT=""
 OPENAI_API_KEY=""
-GEMINI_API_KEY=""
+GOOGLE_API_KEY=""
 ```
 
 ### 参考

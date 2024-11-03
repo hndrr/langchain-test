@@ -154,4 +154,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 .vscode/settings.json
-.gradio/flagged/dataset1.csv
+.gradio/flagged/*
